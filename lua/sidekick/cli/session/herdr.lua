@@ -202,7 +202,7 @@ function M:create_tab_pane()
   if vim.env.HERDR_WORKSPACE_ID then
     vim.list_extend(cmd, { "--workspace", vim.env.HERDR_WORKSPACE_ID })
   end
-  vim.list_extend(cmd, { "--cwd", self.cwd, "--label", self.sid, "--no-focus" })
+  vim.list_extend(cmd, { "--cwd", self.cwd, "--label", self.sid, "--focus" })
   self:add_env(cmd)
   local ret = M.json(cmd, { notify = true })
   return ret and ret.result and ret.result.root_pane
@@ -220,7 +220,7 @@ function M:create_split_pane(direction)
     direction,
     "--cwd",
     self.cwd,
-    "--no-focus",
+    "--focus",
   })
   local size = Config.cli.mux.split.size
   if size > 0 and size <= 1 then
